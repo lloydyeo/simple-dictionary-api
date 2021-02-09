@@ -27,7 +27,7 @@ class EnsurePayloadIsValidJson
         if (!$request->json()->count()) {
             return response()->json([
                 'status' => false,
-                'error' => 'Malformed JSON received. Please check your input'
+                'error' => 'Malformed JSON received. Please check your input.'
             ], 400);
         }
 
