@@ -30,6 +30,6 @@ class CreateDictionarySnapshotsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dictionaries');
+        Schema::dropIfExists('dictionary_snapshots');
     }
 }
