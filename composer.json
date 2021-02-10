@@ -59,7 +59,7 @@
             "@php artisan key:generate --ansi"
         ],
         "test": [
-            "vendor/bin/phpunit"
+            "@php artisan test --testsuite=Feature --stop-on-failure"
         ]
     }
 }
