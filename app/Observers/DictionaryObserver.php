@@ -29,8 +29,8 @@ class DictionaryObserver
         $dictionary_snapshot = new DictionarySnapshot();
         $dictionary_snapshot->dictionary_id = $dictionary->id;
         $dictionary_snapshot->key = $dictionary->key;
-        $dictionary_snapshot->value = $dictionary->value;
-        $dictionary_snapshot->timestamp = $dictionary->timestamp;
+        $dictionary_snapshot->value = $dictionary->getOriginal('value');
+        $dictionary_snapshot->timestamp = $dictionary->getOriginal('timestamp');
         $dictionary_snapshot->save();
     }
 
