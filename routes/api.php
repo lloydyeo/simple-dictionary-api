@@ -17,4 +17,5 @@ use App\Http\Controllers\DictionaryController;
 
 Route::prefix('dictionary')->group(function() {
     Route::post('/', [DictionaryController::class, 'upsert']);
+    Route::get('/{key}', [DictionaryController::class, 'retrieve']);
 });
