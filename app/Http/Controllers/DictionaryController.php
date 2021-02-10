@@ -8,6 +8,17 @@ use App\Models\Dictionary;
 
 class DictionaryController extends Controller
 {
+    public function retrieveAll(Request $request) {
+        $dictionaries = Dictionary::all();
+        foreach ($dictionaries as $dictionary) {
+            $dictionary->value = json_decode($dictionary->value);
+        }
+        return response()->json([
+            'status' => true,
+            'dictionaries' => $dictionaries
+        ], 200);
+    }
+
     public function retrieve(Request $request, $key) {
 
         $dictionary =  Dictionary::where('key', $key)->first();
@@ -19,7 +30,7 @@ class DictionaryController extends Controller
             ], 200);
         }
 
-        $value = $dictionary->value;
+        $value = json_decode($dictionary->value);
 
         if ($request->filled('timestamp')) {
             $timestamp = (int)$request->input('timestamp');
@@ -32,7 +43,7 @@ class DictionaryController extends Controller
                         ->first();
 
                 if ($dictionary_snapshot) {
-                    $value = $dictionary_snapshot->value;
+                    $value = json_decode($dictionary_snapshot->value);
                 } else {
                     return response()->json([
                         'status' => false,
