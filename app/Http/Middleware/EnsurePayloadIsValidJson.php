@@ -24,6 +24,7 @@ class EnsurePayloadIsValidJson
                     'error' => 'JSON expected. Got Content-Type: ' . $content_type . ' instead.'
                 ], 400);
             }
+            /** Handle both invalid & empty requests */
             if (!$request->json()->count()) {
                 return response()->json([
                     'status' => false,
