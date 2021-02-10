@@ -18,7 +18,7 @@ class EnsurePayloadIsValidJson
     {
         if ($request->isMethod('POST')) {
             if (!$request->isJson()) {
-                $content_type = !empty($request->getContentType()) ? $request->getContentType() : 'null';
+                $content_type = (string)$request->getContentType();
                 return response()->json([
                     'status' => false,
                     'error' => 'JSON expected. Got Content-Type: ' . $content_type . ' instead.'
