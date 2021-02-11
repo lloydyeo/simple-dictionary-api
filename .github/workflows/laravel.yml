@@ -56,4 +56,3 @@ jobs:
             cd /var/www/html
             git checkout -f
             git pull
-
