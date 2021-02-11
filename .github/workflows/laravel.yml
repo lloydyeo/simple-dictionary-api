@@ -37,7 +37,7 @@ jobs:
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
         DB_PORT: ${{ job.services.mysql.ports[3306] }}
-      run: vendor/bin/phpunit
+      run: ./vendor/bin/phpunit ./tests/Feature
 
   deploy:
     runs-on: ubuntu-20.04
@@ -56,3 +56,4 @@ jobs:
             cd /var/www/html
             git checkout -f
             git pull
+
