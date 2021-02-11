@@ -56,3 +56,6 @@ jobs:
             cd /var/www/html
             git checkout -f
             git pull
+            composer install --optimize-autoloader --no-dev
+            php artisan optimize:clear
+            php artisan optimize
