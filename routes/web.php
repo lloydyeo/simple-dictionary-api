@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->away('https://documenter.getpostman.com/view/14545141/TW77hiuD');
 });
