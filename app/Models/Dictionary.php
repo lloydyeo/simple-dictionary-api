@@ -21,4 +21,19 @@ class Dictionary extends Model
         'value',
         'timestamp',
     ];
+
+    public function getValueAttribute($value) {
+        return json_decode($value);
+    }
+
+    /**
+     * Set the inserted value into JSON
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setValueAttribute($value)
+    {
+        $this->attributes['value'] = json_encode($value);
+    }
 }
