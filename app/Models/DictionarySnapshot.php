@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class DictionarySnapshot extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'key',
+        'value',
+        'timestamp',
+        'dictionary_id',
+    ];
 }

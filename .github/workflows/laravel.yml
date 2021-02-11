@@ -10,7 +10,7 @@ jobs:
   laravel-tests:
 
     runs-on: ubuntu-20.04
-    
+
     services:
       mysql:
         image: mysql:5.7
@@ -20,7 +20,7 @@ jobs:
         ports:
           - 3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-    
+
     steps:
     - uses: shivammathur/setup-php@b7d1d9c9a92d8d8463ce36d7f60da34d461724f8
       with:
@@ -37,4 +37,23 @@ jobs:
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
         DB_PORT: ${{ job.services.mysql.ports[3306] }}
-      run: vendor/bin/phpunit
+      run: ./vendor/bin/phpunit ./tests/Feature
+
+  deploy:
+    runs-on: ubuntu-20.04
+    needs: [ laravel-tests ]
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Deployment
+        uses: appleboy/ssh-action@main
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          key: ${{ secrets.SSH_KEY }}
+          username: ${{ secrets.SSH_USERNAME }}
+          script: |
+            cd /var/www/html
+            git checkout -f
+            git pull
+
