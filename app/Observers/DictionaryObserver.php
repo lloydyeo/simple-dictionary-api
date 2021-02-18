@@ -26,6 +26,10 @@ class DictionaryObserver
      */
     public function updated(Dictionary $dictionary)
     {
+        if ($dictionary->value == $dictionary->getOriginal('value')) {
+            return;
+        }
+
         $dictionary_snapshot = new DictionarySnapshot();
         $dictionary_snapshot->dictionary_id = $dictionary->id;
         $dictionary_snapshot->key = $dictionary->key;
