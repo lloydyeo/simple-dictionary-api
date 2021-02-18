@@ -78,12 +78,15 @@ class DictionaryController extends Controller
                 $operations[] = [ 'key' => $key, 'result' => 'created' ];
             } else {
                 if ($dictionary->wasChanged()) {
+
                     $value_changed = false;
-                    foreach ($dictionary->getChanges() as $key => $dict_change) {
-                        if ($key == 'value') {
+
+                    foreach ($dictionary->getChanges() as $key_ => $dict_change) {
+                        if ($key_ == 'value') {
                             $value_changed = true;
                         }
                     }
+
                     if ($value_changed) {
                         $operations[] = [ 'key' => $key, 'result' => 'updated', 'changes' => $dictionary->getChanges() ];
                     } else {
